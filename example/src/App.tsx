@@ -24,20 +24,10 @@ export default function App() {
           Sdkx.showIntertitialAd();
         }}
       />
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'red',
-          padding: 5,
-        }}
-      >
-        <BannerAd
-          adUnit={'float-4906'}
-          style={{ height: '100%', width: '100%' }}
-        />
-      </View>
+      <BannerAd
+                adUnit={'float-4901'}
+                style={{ height: 100, width: '100%' }}
+              />
     </View>
   );
 }

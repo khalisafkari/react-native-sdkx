@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import com.facebook.react.bridge.ReactContext;
@@ -27,8 +28,6 @@ public class BannerManager extends ReactViewGroup {
         MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY),
         MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY)
       );
-      Log.d(TAG,"getMeasuredWidth \n" + child.getMeasuredWidth());
-      Log.d(TAG,"getMeasuredWidth \n" + child.getMeasuredHeight());
       child.layout(0,0,child.getMeasuredWidth(),child.getMeasuredHeight());
     }
   };
@@ -48,10 +47,9 @@ public class BannerManager extends ReactViewGroup {
       oldView.removeAllViews();
     }
 
+
     int dpW = resources.getDisplayMetrics().widthPixels;
     int dpH = dp2px(maxHeight,displayMetrics);
-    Log.d(TAG,"widthPixels \n" + String.valueOf(resources.getDisplayMetrics().widthPixels));
-    Log.d(TAG,"heightPixels \n" + String.valueOf(resources.getDisplayMetrics().heightPixels));
     ggAdview.setLayoutParams(new ViewGroup.LayoutParams(dpW,dpH));
     addView(ggAdview);
     callAd();
@@ -81,14 +79,6 @@ public class BannerManager extends ReactViewGroup {
         @Override
         public void onAdLoaded() {
           Log.d("GGADS","Ad Loaded");
-          int top = ggAdview.getTop();
-          int left = ggAdview.getLeft();
-          int height = ggAdview.getHeight();
-          int width = ggAdview.getWidth();
-          Log.d("GGADS", "top \b" + String.valueOf(top));
-          Log.d("GGADS", "left \b"  + String.valueOf(left));
-          Log.d("GGADS", "height \b" + String.valueOf(height));
-          Log.d("GGADS", "width \b" + String.valueOf(width));
         }
       });
   }
@@ -108,15 +98,15 @@ public class BannerManager extends ReactViewGroup {
     return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,dm));
   }
 
-  @Override
-  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    super.onLayout(changed, left, top, right, bottom);
-    final GGAdview ggAdview = (GGAdview) getChildAt(0);
-    if (ggAdview != null) {
-      ggAdview.removeAllViews();
-    }
-    attachNewAdView();
-  }
+//  @Override
+//  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+//    super.onLayout(changed, left, top, right, bottom);
+//    final GGAdview ggAdview = (GGAdview) getChildAt(0);
+//    if (ggAdview != null) {
+//      ggAdview.removeAllViews();
+//    }
+//    attachNewAdView();
+//  }
 
   @Override
   public void requestLayout() {
