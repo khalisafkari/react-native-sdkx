@@ -33,7 +33,10 @@ export default function App() {
           padding: 5,
         }}
       >
-        <BannerAd style={{ height: '100%', maxHeight: 100, width: '100%' }} />
+        <BannerAd
+          adUnit={'float-4906'}
+          style={{ height: '100%', width: '100%' }}
+        />
       </View>
     </View>
   );

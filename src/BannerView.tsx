@@ -5,6 +5,7 @@ const BannerView = requireNativeComponent('GDBannerView');
 
 interface props {
   style?: StyleProp<ViewStyle>;
+  adUnit?: string;
 }
 
 const BannerAd = (props: props) => {

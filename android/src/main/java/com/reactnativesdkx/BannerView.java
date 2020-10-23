@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.greedygame.core.adview.GGAdview;
 import com.greedygame.core.adview.interfaces.AdLoadCallback;
 import com.greedygame.core.adview.modals.AdRequestErrors;
+import com.greedygame.core.adview.modals.RefreshPolicy;
 
 public class BannerView extends LinearLayout {
 
