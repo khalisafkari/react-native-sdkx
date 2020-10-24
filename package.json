@@ -1,6 +1,6 @@
 {
   "name": "react-native-sdkx",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "react-native-sdkx for greedygames",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
