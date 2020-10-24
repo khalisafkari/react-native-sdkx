@@ -29,13 +29,6 @@ class SdkxModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMo
     }
 
 
-
-
-    @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-      promise.resolve(a * b)
-    }
-
     @ReactMethod
     fun initialize(appId: String) {
       val themes: ThemeData = if (iThemes == 0) ThemeData.LIGHT else ThemeData.DARK
