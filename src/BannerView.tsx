@@ -9,7 +9,7 @@ interface props {
   onReadyForRefresh?: Function;
   onUiiClosed?: Function;
   onUiiOpened?: Function;
-  onAdLoadFailed?(error?: string): void;
+  onAdLoadFailed?(error?: string): Function;
   onAdLoaded?: Function;
 }
 

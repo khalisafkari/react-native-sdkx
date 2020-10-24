@@ -56,6 +56,11 @@ import SDKX, { BannerAd } from 'react-native-sdkx';
 interface props {
   style?: StyleProp<ViewStyle>;
   adUnit?: string;
+  onReadyForRefresh?: Function;
+  onUiiClosed?: Function;
+  onUiiOpened?: Function;
+  onAdLoadFailed?(error?: string): Function;
+  onAdLoaded?: Function;
 }
 
 <BannerAd adUnit={'float-4901'} style={{ height: 100, width: '100%' }} />
