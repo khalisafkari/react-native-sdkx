@@ -24,7 +24,10 @@ export default function App() {
           Sdkx.showIntertitialAd();
         }}
       />
-      <BannerAd adUnit={'float-4901'} style={{ height: 100, width: '100%' }} />
+      <BannerAd
+        adUnit={'float-4901'}
+        style={{ height: 100, width: '100%' }}
+      />
     </View>
   );
 }

@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 import com.greedygame.core.adview.GGAdview;
 import com.greedygame.core.adview.interfaces.AdLoadCallback;
@@ -62,22 +65,29 @@ public class BannerManager extends ReactViewGroup {
       ggAdview.loadAd(new AdLoadCallback() {
         @Override
         public void onReadyForRefresh() {
+          getEmitter().receiveEvent(getId(),"onReadyForRefresh", null);
           Log.d("GGADS","Ad Ready for refresh");
         }
         @Override
         public void onUiiClosed() {
+          getEmitter().receiveEvent(getId(),"onUiiClosed", null);
           Log.d("GGADS","Uii closed");
         }
         @Override
         public void onUiiOpened() {
+          getEmitter().receiveEvent(getId(),"onUiiOpened", null);
           Log.d("GGADS","Uii Opened");
         }
         @Override
         public void onAdLoadFailed (AdRequestErrors cause) {
+          WritableMap params = Arguments.createMap();
+          params.putString("error",cause.toString());
+          getEmitter().receiveEvent(getId(),"onAdLoadFailed", params);
           Log.d("GGADS","Ad Load Failed "+cause);
         }
         @Override
         public void onAdLoaded() {
+          getEmitter().receiveEvent(getId(),"onAdLoaded", null);
           Log.d("GGADS","Ad Loaded");
         }
       });
@@ -92,6 +102,10 @@ public class BannerManager extends ReactViewGroup {
 
   private ReactContext getDim() {
     return (ReactContext) getContext();
+  }
+
+  private RCTEventEmitter getEmitter() {
+    return getDim().getJSModule(RCTEventEmitter.class);
   }
 
   private int dp2px(int dp, DisplayMetrics dm) {
