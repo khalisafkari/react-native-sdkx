@@ -1,4 +1,5 @@
 ## react-native-sdkx
+<a href="https://ibb.co/6nVTVYb"><img src="https://i.ibb.co/4m9X9WM/Untitled-presentation.png" alt="Untitled-presentation" border="0"></a>
 
 GreedyGame’s SDK X is an SDK for app developers to increase their monetisation capabilities. You can also connect your AdMob account and mediate ads to optimise your **AdMob** Monetization.
 
