@@ -23,7 +23,7 @@ export default function App() {
           Sdkx.showIntertitialAd();
         }}
       />
-      <BannerAd adUnit={'float-4901'} style={{ height: 100, width: '100%' }} />
+      <BannerAd adUnit={'float-4901'} style={styles.banner} />
     </View>
   );
 }
@@ -31,5 +31,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  banner: {
+    height: 100,
+    width: '100%',
   },
 });
