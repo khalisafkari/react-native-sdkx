@@ -6,16 +6,16 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
-class BannerViewManager: ViewGroupManager<BannerManager>() {
+class BannerViewManager: ViewGroupManager<BannerAd>() {
 
   override fun getName() = "GDBannerView"
 
-  override fun createViewInstance(reactContext: ThemedReactContext): BannerManager {
-      return BannerManager(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): BannerAd {
+      return BannerAd(reactContext)
   }
 
   @ReactProp(name = "adUnit")
-  fun setAdUnit(view: BannerManager, adUnit: String) {
+  fun setAdUnit(view: BannerAd, adUnit: String) {
     view.setAdUnit(adUnit)
   }
 

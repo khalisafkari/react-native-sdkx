@@ -18,25 +18,46 @@ yarn add react-native-sdkx
 <a href="https://ibb.co/FhdnrRY"><img width="49%" src="https://i.ibb.co/104bgFX/Screenshot-1603528544.png" alt="Screenshot-1603528544" border="0"></a>
 <a href="https://ibb.co/09Ds8dB"><img width="49%" src="https://i.ibb.co/SmsfW9Q/Screenshot-1603528555.png" alt="Screenshot-1603528555" border="0"></a><br /><a target='_blank' href='https://id.imgbb.com/'>free pic png</a><br />
 
-```typescript
 
+
+```typescript jsx
+
+// in-initialize
+interface option {
+  appId: string; // required
+  themes?: number; // default 0 choose 1 | 0
+  enableCoppa?: boolean; // optional default true
+  enableCcpa?: boolean; // optional default true
+  enableGdpr?: boolean; // optional default true
+  enableDebug?: boolean; // optional default true
+}
 
 interface props  {
-  initialize(appId: string): void;
+  initialize(option): Promise<boolean>;
   isinitialize(): Promise<boolean>;
   loadAdIntertitial(unitAd: string): Promise<boolean>;
   showIntertitialAd(): void;
   destroy(): void;
-  setThemes(select: 0 | 1): void;
-  setCCPA(status: boolean): void;
-  setCOPPA(status: boolean): void;
-  setGDPR(status: boolean): void;
-  setDebug(status: boolean): void;
-  MopubAds(status: boolean): void;
-  setAdmob(status: boolean): void;
-  setFacebookAds(status: boolean): void;
   prefetchAds(unitAd: string, callback: Function): void;
 };
+```
+
+
+```typescript jsx
+  // index.js
+
+  import SDK from 'react-native-sdkx';
+
+  export interface option {
+    appId: string;
+    themes?: number;
+    enableCoppa?: boolean;
+    enableCcpa?: boolean;
+    enableGdpr?: boolean;
+    enableDebug?: boolean;
+  }
+
+  SDK.initialize(option)
 ```
 
 ```typescript
@@ -55,7 +76,7 @@ import SDKX, { BannerAd } from 'react-native-sdkx';
 
 interface props {
   style?: StyleProp<ViewStyle>;
-  adUnit?: string;
+  adUnit?: string; // bannerId | nativeId
   onReadyForRefresh?: Function;
   onUiiClosed?: Function;
   onUiiOpened?: Function;
@@ -63,10 +84,15 @@ interface props {
   onAdLoaded?: Function;
 }
 
-<BannerAd adUnit={'float-4901'} style={{ height: 100, width: '100%' }} />
+<BannerAd adUnit={'AdId'} style={{ height: 100, width: '100%' }} />
 
 ```
 
+```
+To beautify the native appearance -
+I suggest a minimum height style of 250
+
+```
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

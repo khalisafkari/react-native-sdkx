@@ -1,24 +1,46 @@
 import { NativeModules } from 'react-native';
-import BannerAd from './BannerView';
+export { default as BannerAd } from './BannerView';
 
-type SdkxType = {
-  initialize(appId: string): void;
-  isinitialize(): Promise<boolean>;
-  loadAdIntertitial(unitAd: string): Promise<boolean>;
-  showIntertitialAd(): void;
-  destroy(): void;
-  setThemes(select: 0 | 1): void;
-  setCCPA(status: boolean): void;
-  setCOPPA(status: boolean): void;
-  setGDPR(status: boolean): void;
-  setDebug(status: boolean): void;
-  MopubAds(status: boolean): void;
-  setAdmob(status: boolean): void;
-  setFacebookAds(status: boolean): void;
-  prefetchAds(unitAd: string, callback: Function): void;
+const { GDModule } = NativeModules;
+export interface option {
+  appId: string;
+  themes?: number;
+  enableCoppa?: boolean;
+  enableCcpa?: boolean;
+  enableGdpr?: boolean;
+  enableDebug?: boolean;
+}
+export default {
+  initialize: async function ({
+    appId = '45921653',
+    themes = 1,
+    enableCcpa = true,
+    enableCoppa = true,
+    enableGdpr = true,
+    enableDebug = true,
+  }: option): Promise<boolean> {
+    return await GDModule.initialize({
+      appId,
+      themes,
+      enableCcpa,
+      enableCoppa,
+      enableGdpr,
+      enableDebug,
+    });
+  },
+  isinitialize: async function (): Promise<boolean> {
+    return await GDModule.isinitialize();
+  },
+  loadAdIntertitial: async function (unitAd: string): Promise<boolean> {
+    return await GDModule.loadAdIntertitial(unitAd);
+  },
+  destroy: function (): void {
+    return GDModule.destroy();
+  },
+  showIntertitialAd: function (): void {
+    return GDModule.showIntertitialAd();
+  },
+  prefetchAds: function (unitAd: string, callback: Function): void {
+    return GDModule.prefetchAds(unitAd, callback);
+  },
 };
-
-const { Sdkx } = NativeModules;
-export { BannerAd };
-
-export default Sdkx as SdkxType;

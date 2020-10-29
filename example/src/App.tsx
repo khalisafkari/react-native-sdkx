@@ -9,7 +9,6 @@ export default function App() {
   );
 
   React.useEffect(() => {
-    Sdkx.initialize('45921653');
     Sdkx.isinitialize().then(setisinitialize);
     Sdkx.loadAdIntertitial('float-4898').then(setLoadIntertitial);
   }, []);
