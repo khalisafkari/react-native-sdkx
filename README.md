@@ -15,8 +15,8 @@ yarn add react-native-sdkx
 
 ### Usage
 
-<a href="https://ibb.co/FhdnrRY"><img width="49%" src="https://i.ibb.co/104bgFX/Screenshot-1603528544.png" alt="Screenshot-1603528544" border="0"></a>
-<a href="https://ibb.co/09Ds8dB"><img width="49%" src="https://i.ibb.co/SmsfW9Q/Screenshot-1603528555.png" alt="Screenshot-1603528555" border="0"></a><br /><a target='_blank' href='https://id.imgbb.com/'>free pic png</a><br />
+<a href="https://ibb.co/FhdnrRY"><img width="49%" src="https://i.ibb.co/104bgFX/Screenshot-1603528544.png" alt="Screenshot-1603528544" border="0">
+<a href="https://ibb.co/09Ds8dB"><img width="49%" src="https://i.ibb.co/SmsfW9Q/Screenshot-1603528555.png" alt="Screenshot-1603528555" border="0">
 
 
 
