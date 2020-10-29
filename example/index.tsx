@@ -4,8 +4,7 @@ import { name as appName } from './app.json';
 import SDK from 'react-native-sdkx';
 
 SDK.initialize({
-  appId:'45921653'
-}).then(console.log)
-
+  appId: '45921653',
+});
 
 AppRegistry.registerComponent(appName, () => App);
