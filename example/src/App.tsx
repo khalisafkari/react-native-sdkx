@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   banner: {
-    height: 100,
+    height: 150,
     width: '100%',
   },
 });

@@ -18,10 +18,10 @@ import com.greedygame.core.adview.interfaces.AdLoadCallback;
 import com.greedygame.core.adview.modals.AdRequestErrors;
 import com.reactnativesdkx.utils.GreedyGameManager;
 
-public class BannerAd extends LinearLayout implements AdLoadCallback {
+public class BannerAd extends LinearLayout {
 
   private static String  TAG = "GGADS";
-  private int maxHeight = 300;
+  private int maxHeight = 250;
   private String unit = "float-4901";
 
   private final Runnable measureAndLayout = () -> {
@@ -57,9 +57,11 @@ public class BannerAd extends LinearLayout implements AdLoadCallback {
       oldView.removeAllViews();
     }
 
-    int dpW = resources.getDisplayMetrics().widthPixels;
-    int dpH = dp2px(maxHeight,displayMetrics);
-    ggAdview.setLayoutParams(new ViewGroup.LayoutParams(dpW,dpH));
+//    int dpW = resources.getDisplayMetrics().widthPixels;
+//    int dpH = dp2px(maxHeight,displayMetrics);
+//    Log.d(TAG, "dpW" + String.valueOf(dpW));
+//    Log.d(TAG, "dpH" + String.valueOf(dpH));
+//    ggAdview.setLayoutParams(new ViewGroup.LayoutParams(dpW,dpH));
     addView(ggAdview);
     GreedyGameManager greedyGameManager = new GreedyGameManager();
     if (greedyGameManager.isSdkInitialized()) {
@@ -72,37 +74,42 @@ public class BannerAd extends LinearLayout implements AdLoadCallback {
   private void callAdView() {
     final GGAdview ggAdview = (GGAdview) getChildAt(0);
     ggAdview.setUnitId(unit);
-    ggAdview.setAdsMaxHeight(maxHeight);
-    ggAdview.loadAd(this);
+    ggAdview.setAdsMaxHeight(250);
+    ggAdview.loadAd(new AdLoadCallback() {
+      @Override
+      public void onReadyForRefresh() {
+        getEmitter().receiveEvent(getId(),"onReadyForRefresh", null);
+        Log.d("GGADS","Ad Ready for refresh");
+      }
+      @Override
+      public void onUiiClosed() {
+        getEmitter().receiveEvent(getId(),"onUiiClosed", null);
+        Log.d("GGADS","Uii closed");
+      }
+      @Override
+      public void onUiiOpened() {
+        getEmitter().receiveEvent(getId(),"onUiiOpened", null);
+        Log.d("GGADS","Uii Opened");
+      }
+      @Override
+      public void onAdLoadFailed (AdRequestErrors cause) {
+        WritableMap params = Arguments.createMap();
+        params.putString("error",cause.toString());
+        getEmitter().receiveEvent(getId(),"onAdLoadFailed", params);
+        Log.d("GGADS","Ad Load Failed "+cause);
+      }
+      @Override
+      public void onAdLoaded() {
+        WritableMap map = Arguments.createMap();
+        map.putInt("height", ggAdview.getWidth());
+        map.putInt("width", ggAdview.getHeight());
+        getEmitter().receiveEvent(getId(),"onAdLoaded", map);
+        Log.d("GGADS","Ad Loaded");
+      }
+    });
   }
 
-  @Override
-  public void onReadyForRefresh() {
-    getEmitter().receiveEvent(getId(),"onReadyForRefresh", null);
-    Log.d("GGADS","Ad Ready for refresh");
-  }
-  @Override
-  public void onUiiClosed() {
-    getEmitter().receiveEvent(getId(),"onUiiClosed", null);
-    Log.d("GGADS","Uii closed");
-  }
-  @Override
-  public void onUiiOpened() {
-    getEmitter().receiveEvent(getId(),"onUiiOpened", null);
-    Log.d("GGADS","Uii Opened");
-  }
-  @Override
-  public void onAdLoadFailed (AdRequestErrors cause) {
-    WritableMap params = Arguments.createMap();
-    params.putString("error",cause.toString());
-    getEmitter().receiveEvent(getId(),"onAdLoadFailed", params);
-    Log.d("GGADS","Ad Load Failed "+cause);
-  }
-  @Override
-  public void onAdLoaded() {
-    getEmitter().receiveEvent(getId(),"onAdLoaded", null);
-    Log.d("GGADS","Ad Loaded");
-  }
+
 
   private ReactContext getDim() {
     return (ReactContext) getContext();
